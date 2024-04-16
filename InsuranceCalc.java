@@ -27,7 +27,7 @@ public class InsuranceCalc {
         for (Map.Entry<String, Double> iter : balanceOwed.entrySet()) {
             System.out.printf("%s: $%.2f%n", iter.getKey(), iter.getValue());
 
-            // Checks and balances
+            // Checks and Balances
             check += iter.getValue();
         }
 
@@ -55,7 +55,6 @@ public class InsuranceCalc {
             List<String> carOwners = new ArrayList<>();
             boolean allOwners = false;
 
-            // Add all vehicle owners to name list
             while (!allOwners) {
                 String carOwner = scanner.nextLine();
                 carOwners.add(carOwner);
@@ -64,7 +63,6 @@ public class InsuranceCalc {
                     allOwners = true;
             }
 
-            // Add insurance value to object
             System.out.println("How much is owed on this vehicle?");
             double amountOwed = scanner.nextDouble();
             scanner.nextLine();
@@ -101,38 +99,36 @@ public class InsuranceCalc {
         }
     }
 
-    public static Map<String, Double> balance(List<Car> cars) {   // Maybe convert added sum of balance to string to print pretty?
+    public static Map<String, Double> balance(List<Car> cars) {
         Map<String, Double> balanceOwed = new HashMap<>();
 
-        // Get names of owners to map to zeroed values --> check for duplicates
         for (int i = 0; i < cars.size(); i++) {
             List<String> owners = cars.get(i).getOwners();  // Lists the names of the owners
             double carAmount = cars.get(i).getAmount();     // Lists the total value of the insurance owed
 
             for (int j = 0; j < owners.size(); j++) {
-                if (balanceOwed.containsKey(owners.get(j))) // No duplicate keys
-                    balanceOwed.put(owners.get(j), balanceOwed.get(owners.get(j)) + (carAmount / owners.size()) - (cars.get(i).getDiscountPortion() / owners.size()));   // Add the value of cars[i] here (make sure to divide by owners.size())
+                if (balanceOwed.containsKey(owners.get(j))) {
+                    // Add the value of cars[i] here (make sure to divide by owners.size())
+                    balanceOwed.put(owners.get(j), balanceOwed.get(owners.get(j)) + (carAmount / owners.size()) - (cars.get(i).getDiscountPortion() / owners.size())); 
+                }  
                 
-                    else {
-                        balanceOwed.put(owners.get(j), (carAmount / owners.size()) - (cars.get(i).getDiscountPortion() / owners.size()));    // Should add a new key and value after subtracting the vehicle's discount amount
+                else {
+                    // Should add a new key and value after subtracting the vehicle's discount amount
+                    balanceOwed.put(owners.get(j), (carAmount / owners.size()) - (cars.get(i).getDiscountPortion() / owners.size()));    
                 }
                 
             }
         }
-
 
         return balanceOwed;
     }
 }
 
 class Car {
-    private String model;
-    private List<String> owners;
-    private double amount;
-    // Add parameter for portion of total value --> (owner cost / total cost)
-    private double discountPortion;
-    // Add discount parameter for saved calculation --> amount - discountPortion
-    private double totalToPay;
+    private String model;   // Unique ID 
+    private List<String> owners;    // List of owners i.e. responsible for paying insurance cost
+    private double amount;  // Insurance cost for vehicle before discount calculation
+    private double discountPortion; // Total amount to discount from vehicle's insurance cost 
 
     public Car(String model, List<String> owners, double amount) {
         this.model = model;
@@ -151,7 +147,4 @@ class Car {
 
     public double getDiscountPortion() { return this.discountPortion; }
     public void setDiscountPortion(double discountPortion) { this.discountPortion = discountPortion; }
-
-    public double getTotalToPay() { return this.totalToPay; }
-    public void setTotalToPay(double totalToPay) { this.totalToPay = totalToPay; }
 }
