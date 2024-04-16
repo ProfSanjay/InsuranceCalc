@@ -110,12 +110,12 @@ public class InsuranceCalc {
             for (int j = 0; j < owners.size(); j++) {
                 if (balanceOwed.containsKey(owners.get(j))) {
                     // Add the value of cars[i] here (make sure to divide by owners.size())
-                    balanceOwed.put(owners.get(j), balanceOwed.get(owners.get(j)) + (carAmount / owners.size()) - (cars.get(i).getDiscountPortion() / owners.size())); 
+                    balanceOwed.put(owners.get(j), balanceOwed.get(owners.get(j)) + (carAmount - cars.get(i).getDiscountPortion()) / owners.size()); 
                 }  
                 
                 else {
                     // Should add a new key and value after subtracting the vehicle's discount amount
-                    balanceOwed.put(owners.get(j), (carAmount / owners.size()) - (cars.get(i).getDiscountPortion() / owners.size()));    
+                    balanceOwed.put(owners.get(j), (carAmount - cars.get(i).getDiscountPortion()) / owners.size());    
                 }
                 
             }
