@@ -3,7 +3,7 @@ import java.util.*;
 
 public class InsuranceCalc {
 
-
+    // TODO: Run as an executable for easy use + make into a pretty dialog box?
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
                 
@@ -32,7 +32,7 @@ public class InsuranceCalc {
             check += iter.getValue();
         }
 
-        if (check == balanceDue) 
+        if (check == balanceDue) // TODO: Compare as strings formatted to 2 decimal values
             System.out.println("\nCongrats! Your insurance bill has been split fairly!");
         else
             System.out.println("\nSomeone fucked up somewhere!");
