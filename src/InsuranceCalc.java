@@ -1,3 +1,8 @@
+/*
+ * Title: InsuranceCalc
+ * Author: Nic Samlal
+ * Date of Last Revision: 4/28/2025
+ */
 package src;
 import java.util.*;
 
